@@ -140,7 +140,6 @@ function drawHUD(){
  text(time(car.lapTime),256,177,'#000','center',true);
  text(`B ${Math.ceil(car.boost).toString().padStart(2,'0')}`,256,188,car.boosting?'#aa0000':'#000','center',true);
  rect(96,186,127,3,'#000');rect(96,186,clamp(Math.abs(car.speed)*2.237/240,0,1)*127,3,car.boosting?'#ffff00':'#5599ff');
- text(Math.round(Math.abs(car.speed)*2.237).toString().padStart(3,'0'),109,191,'#fff','center',true);
  if(car.damage>0){ctx.strokeStyle='#000';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(32,9);let x=32,y=9;for(let i=0;i<car.damage*1.65;i++){x+=1.5;y+=Math.sin(i*3.8)>0?1:-1;ctx.lineTo(x,clamp(y,5,14));}ctx.stroke();}
  if(car.boosting){for(const side of [-1,1])for(let i=0;i<exhaustMouths.length;i++){const [leftX,y]=exhaustMouths[i],x=side<0?leftX:319-leftX;const h=5+Math.floor((Math.sin(elapsed*70+i*5)+1)*5);rect(x-2,y-h,5,h,'#ff7700');rect(x-1,y-h+2,3,h-2,'#ffff00');}}
  if(car.recovery>0){drawChains();text(car.autoRelease||car.chains>=228?'LOWERING CAR':'SPACE TO RELEASE',160,48,'#fff','center',true);}
