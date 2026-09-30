@@ -15,7 +15,7 @@ const simulationClock=new SimulationClock();
 let screen='home',selection=0,buttons=[],elapsed=0,lastTime=0,paused=false,mode='practice',selectedTrack=0,superLeague=false,result=null,league=null,countdown=0;
 let save;try{save=JSON.parse(localStorage.getItem('scr-1989-v1')||'{}');}catch{save={};}
 save.records??={};
-let physicsBackend=save.physicsBackend==='dos'?'dos':'amiga',switchingPhysics=false;
+let physicsBackend=save.physicsBackend==='amiga'?'amiga':'dos',switchingPhysics=false;
 const machines={};
 let fullResolution=save.fullResolution===true,renderPixelRatio=window.devicePixelRatio||1;
 const colors={white:'#fff',yellow:'#ffff00',black:'#000',red:'#dd9999',blue:'#5599ff'};

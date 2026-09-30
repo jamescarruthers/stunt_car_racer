@@ -24,10 +24,11 @@ if(process.argv.includes('--production')) {
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'});const page=await browser.newPage({viewport:{width:1100,height:900},deviceScaleFactor:2});const errors=[];
 page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
 await page.goto(targetUrl||(server?`http://127.0.0.1:${server.address().port}${basePath}`:'http://127.0.0.1:5173'));await page.waitForFunction(()=>window.__scr);await page.screenshot({path:'analysis/menu-browser.png'});
+if(await page.locator('#physics').inputValue()!=='dos'||await page.evaluate(()=>window.__scr.physics.backend)!=='dos')errors.push('Fresh browser did not default to DOS physics');
 if(process.argv.includes('--boost-only')) {
  await page.keyboard.press('ArrowDown');await page.keyboard.press('Enter');await page.keyboard.press('Enter');await page.keyboard.press('Enter');
  for(const backend of ['amiga','dos']) {
-  if(backend==='dos')await page.locator('#physics').selectOption(backend);
+  await page.locator('#physics').selectOption(backend);
   await page.waitForFunction(backend=>window.__scr.physics.backend===backend&&window.__scr.state.car.grounded&&!window.__scr.state.car.recovery,backend,{timeout:15000});
   const boost=await page.evaluate(()=>window.__scr.state.car.boost);
   await page.keyboard.down('Space');
@@ -47,7 +48,7 @@ if(process.argv.includes('--camera-only')) {
  await page.locator('#graphics').click();
  await page.keyboard.press('ArrowDown');await page.keyboard.press('Enter');await page.keyboard.press('Enter');await page.keyboard.press('Enter');
  for(const backend of ['amiga','dos']) {
-  if(backend==='dos')await page.locator('#physics').selectOption(backend);
+  await page.locator('#physics').selectOption(backend);
   await page.waitForFunction(backend=>window.__scr.physics.backend===backend&&window.__scr.state.car.grounded&&!window.__scr.state.car.recovery,backend,{timeout:15000});
   await page.waitForTimeout(1000);
   const view=await page.evaluate(()=>({car:window.__scr.state.car,camera:window.__scr.renderer.camera}));
@@ -58,7 +59,7 @@ if(process.argv.includes('--camera-only')) {
  console.log('Errors:',errors);await browser.close();if(server)await new Promise(resolve=>server.close(resolve));process.exit(errors.length?1:0);
 }
 if(process.argv.includes('--dos-season-only')) {
- await page.locator('#physics').selectOption('dos');
+ await page.locator('#screen').focus();
  await page.waitForFunction(()=>window.__scr.physics.backend==='dos'&&!document.querySelector('#physics').disabled);
  await page.keyboard.press('Enter');await page.keyboard.press('Enter');
  await page.waitForFunction(()=>window.__scr.state.car.grounded&&!window.__scr.state.car.recovery,{},{timeout:15000});
@@ -72,6 +73,8 @@ if(process.argv.includes('--dos-season-only')) {
  console.log('DOS season start:',state,'Errors:',errors);
  await browser.close();if(server)await new Promise(resolve=>server.close(resolve));process.exit(errors.length?1:0);
 }
+await page.locator('#physics').selectOption('amiga');
+await page.waitForFunction(()=>window.__scr.physics.backend==='amiga'&&!document.querySelector('#physics').disabled);
 const physics=await page.evaluate(()=>window.__scr.physics);
 if(!physics.engine.includes('Original 68000')||physics.stepSeconds!==.12)errors.push('Browser is not running the original physics');
 async function checkResolution(full) {

@@ -28,7 +28,7 @@ The workflow follows the [Vite deployment guide](https://vite.dev/guide/static-d
 
 ## Playing
 
-Use **PHYSICS → AMIGA / DOS** in the header to change version. The choice persists after reload. Switching during a race restarts that same track with the selected physics; lap records are separate for each version. The graphics option is independent.
+**DOS is the default** when no physics preference is saved. Use **PHYSICS → AMIGA / DOS** in the header to change version. The choice persists after reload, including existing Amiga selections. Switching during a race restarts that same track with the selected physics; lap records are separate for each version. The graphics option is independent.
 
 Choose **Practice**, select one of the eight tracks, then start. **Start a season** races rivals across four divisions. A season awards two points for winning and one for the fastest lap, with promotion/relegation after four player races. Progress and lap records are saved in this browser.
 
