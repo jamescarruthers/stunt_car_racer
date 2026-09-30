@@ -11,6 +11,7 @@ import {Rival} from '../src/physics.js';
 import {carFrame} from '../src/orientation.js';
 import * as THREE from 'three';
 import {WorldRenderer} from '../src/renderer.js';
+import {CockpitEffects} from '../src/cockpit-effects.js';
 
 const read=name=>fs.readFileSync(new URL(name,import.meta.url));
 const payload=read('../public/assets/original-code.bin');
@@ -185,9 +186,24 @@ test('off-road ground contact triggers the original recovery grace period and sa
  for(let i=0;i<80;i++)car.step(ORIGINAL_STEP);
  const safe=machine.get(0x1bb9b,1);
  machine.put(0x1bcd8,450*131072,4);machine.put(0x1bce0,450*131072,4);machine.put(0x1bcdc,25*262144,4);machine.locate();car.readState();
- for(let i=0;i<160&&!car.falls;i++)car.step(ORIGINAL_STEP);
+ let groundContact=false;
+ for(let i=0;i<160&&!car.falls;i++){car.step(ORIGINAL_STEP);groundContact ||= car.offRoadGround;}
+ assert.ok(groundContact,'dust must be triggered by native ground contact');
+ assert.ok(car.events.includes('ground-impact'),'falling onto the ground must play its impact sound');
  assert.equal(car.falls,1);assert.equal(car.lastPiece,safe);assert.ok(car.recovery>0);
  assert.deepEqual(car.previous,car.snapshot(),'no interpolation across the relocation');
+});
+
+test('cockpit wheel heights match the original Amiga suspension drawing routine',()=>{
+ machine.initialise(0);
+ const effects=new CockpitEffects(JSON.parse(read('../public/assets/cockpit-effects.json')));
+ for(const suspension of [-768,-256,0,200,512,1024,2047,4096,5120]) {
+  machine.put(0x1bd14,suspension);machine.put(0x1bd16,suspension);
+  machine.put(0x1bbdd,186,1);machine.put(0x1bbda,0,1);
+  machine.call(0x5e778);
+  assert.equal(effects.height(suspension),machine.get(0x6a1a6),'left wheel');
+  assert.equal(effects.height(suspension),machine.get(0x6a176),'right wheel');
+ }
 });
 
 test('season rival contact is resolved by the original collision routine',()=>{

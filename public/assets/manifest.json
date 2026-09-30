@@ -65,6 +65,48 @@
       "format": "4 bitplanes, word interleaved"
     },
     {
+      "file": "cockpit-sprites.png",
+      "payloadOffset": 376502,
+      "diskOffset": 432822,
+      "sourceBytes": 32000,
+      "sha256": "f2ffc13bc17e418c4cea62e863e361df3fe7ddfe8569217d047f41ec03ef468f",
+      "paletteOffset": 72324,
+      "format": "4 bitplanes, word interleaved",
+      "transparentIndex": 1
+    },
+    {
+      "file": "cockpit-effects.json",
+      "payloadOffset": 375404,
+      "diskOffset": 431724,
+      "sourceBytes": 832,
+      "sha256": "5f4b7d243d18adc921203ff5f4663cc629ae9dfe59a5849a0a2721ee91a9b960",
+      "format": "graphics-object source rectangles and screen positions"
+    },
+    {
+      "file": "cockpit-effects.json",
+      "payloadOffset": 338076,
+      "diskOffset": 394396,
+      "sourceBytes": 32,
+      "sha256": "25d215a955cad2417c15a037d21218f45307c9f1f90fcd6336f65321b0c60c50",
+      "format": "dust offsets and animation sequence"
+    },
+    {
+      "file": "cockpit-effects.json",
+      "payloadOffset": 58178,
+      "diskOffset": 114498,
+      "sourceBytes": 512,
+      "sha256": "9c809483ad14b2545dc4454fc2866792cbbea642693871cf903e1d8f6815e9a5",
+      "format": "wheel suspension lookup"
+    },
+    {
+      "file": "cockpit-effects.json",
+      "payloadOffset": 304036,
+      "diskOffset": 360356,
+      "sourceBytes": 136,
+      "sha256": "c40b4624420fd5d53ded5113e9f398e80deb4437411338af145dbce1e3cad96d",
+      "format": "portrait source positions and driver mapping"
+    },
+    {
       "file": "wreck.png",
       "payloadOffset": 192728,
       "diskOffset": 249048,

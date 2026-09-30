@@ -130,7 +130,8 @@ export class OriginalMachine {
   const bcd=this.get(0x1ca20,1);
   return {offRoad:!!this.get(0x1bb9c,1),contacts:this.get(0x1bb7d,1),boost:(bcd>>4)*10+(bcd&15),
    boosting:!!this.get(0x1bb62,1),throttle:!!this.get(0x1bba8,1),damage:this.get(0x1bb55,1)/240*100,
-   wreck:!!this.get(0x1bca2,1),impact:this.get(0x1bc3a)/2048};
+   wreck:!!this.get(0x1bca2,1),impact:this.get(0x1bc3a)/2048,
+   offRoadGround:!!(this.get(0x1bb9c,1)&128),suspension:[this.get(0x1bd14,2,true),this.get(0x1bd16,2,true)]};
  }
  recoveryTarget() {
   if(!this.get(0x1bb9c,1)||!this.get(0x1bb7e,1)||this.get(0x1bbdf,1))return null;

@@ -30,7 +30,7 @@ The workflow follows the [Vite deployment guide](https://vite.dev/guide/static-d
 
 **DOS is the default** when no physics preference is saved. Use **PHYSICS → AMIGA / DOS** in the header to change version. The choice persists after reload, including existing Amiga selections. Switching during a race restarts that same track with the selected physics; lap records are separate for each version. The graphics option is independent.
 
-Choose **Practice**, select one of the eight tracks, then start. **Start a season** races rivals across four divisions. A season awards two points for winning and one for the fastest lap, with promotion/relegation after four player races. Progress and lap records are saved in this browser.
+Choose **Practice**, select one of the eight tracks, then start. **Start a season** shows the original driver portraits and current division lineup before racing rivals across four divisions. **Drivers / Divisions** also opens this page from the main menu. A season awards two points for winning and one for the fastest lap, with promotion/relegation after four player races. Progress and lap records are saved in this browser.
 
 | Control | Action |
 | --- | --- |
@@ -58,6 +58,8 @@ After recovery, **press Space to release the crane**. The original lift, swing a
 **Browser presentation and race flow:** Three.js rendering, camera placement, visible instruments and effects, menus, lap/season bookkeeping, rival driving policy and sound playback remain browser implementations. Rival positions are converted into original road coordinates for the native collision routines. Original damage logic retains offscreen cockpit bitplanes. The first crane drop releases automatically; later recoveries wait for Space. Manual recovery and automatic recovery use the native restart routine. This is a player-physics execution port, not a complete Amiga/DOS machine emulator or full race-loop emulation.
 
 The **3D** button (or **G**, including in fullscreen) switches between the original 320×200 rendering and full-resolution 3D at the display's pixel density. The choice is saved locally and can be changed during a race. Original cockpit and menu bitmap artwork retains its pixel detail in either mode.
+
+The cockpit displays the original animated front-wheel sprites, with independent heights driven by each native engine's suspension state. Off-road ground contact produces the original eight dust-cloud sprites. Artwork, wheel-height lookup, dust frame order and sprite offsets come from the supplied Amiga disk; wheel rotation timing and particle animation are browser presentation adaptations. Both physics modes use these effects, which freeze while paused and clear during crane recovery.
 
 **Timing:** Amiga physics executes once every six PAL frames (0.12 seconds). DOS uses the original calibration routine with coefficient `0x646f` and its native clock increment of `0.054921875` seconds (about 18.2 updates/second). DOS originally adapts to CPU speed; this chooses its original minimum coefficient consistently across browsers. Car/camera poses, the rival and moving bridge vertices interpolate between completed states on `requestAnimationFrame`. Interpolation does not change CPU memory or collision geometry, and pause freezes both simulation and interpolation. This keeps the original input/physics cadence and adds up to one original tick of presentation latency. Full-resolution 3D remains independently selectable.
 
@@ -87,6 +89,7 @@ npm run build
 - `tools/probe-original.py`, `analysis/original-physics-traces.json` and `analysis/original-runtime-traces.json`: independent Unicorn measurements from the disk. Use `--runtime-only --output analysis/original-runtime-traces.json` to reproduce the extended gameplay fixtures.
 - `src/original-machine.js`, `src/dos-machine.js`, `src/original-car.js`: the two native CPU adapters and shared race bookkeeping.
 - `src/simulation-clock.js`: fixed native tick and render interpolation.
+- `src/cockpit-effects.js`, `public/assets/cockpit-sprites.png` and `cockpit-effects.json`: original wheel/dust artwork and presentation data. Check both physics modes with `node tools/browser-check.mjs --production --presentation-only`.
 - `tests/emulated-physics.test.js`, `tests/dos-physics.test.js`: current original-code parity and integration checks. Other test files retain the preceding continuous-solver audit, alongside asset/track/season checks.
 - `tools/browser-check.mjs`: Chrome smoke check and screenshots; run against the dev server with `node tools/browser-check.mjs`. Use `node tools/browser-check.mjs --production` to serve and test the packaged `dist/` build. Set `CHROME_PATH` if Chrome is installed elsewhere.
 

@@ -109,7 +109,10 @@ test('DOS automatic recovery uses the original ground-contact delay and saved ro
  for(const [axis,value] of [450*512,12*1024,450*512].entries())
   for(let plane=0;plane<3;plane++)machine.put(0x530c+axis+plane*3,value>>plane*8);
  machine.locate();car.readState();
- for(let i=0;i<300&&!car.falls&&!car.finished;i++)car.step(machine.stepSeconds);
+ let groundContact=false;
+ for(let i=0;i<300&&!car.falls&&!car.finished;i++){car.step(machine.stepSeconds);groundContact ||= car.offRoadGround;}
+ assert.ok(groundContact,'dust must be triggered by native ground contact');
+ assert.ok(car.events.includes('ground-impact'),'falling onto the ground must play its impact sound');
  assert.equal(car.falls,1);assert.equal(car.lastPiece,safe);assert.ok(car.recovery>0);
  assert.deepEqual(car.previous,car.snapshot());
 });

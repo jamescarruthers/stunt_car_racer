@@ -111,7 +111,8 @@ export class DosMachine {
   const bcd=this.get(0x5677);
   return {offRoad:!!this.get(0x4b27),contacts:this.get(0x4b26),boost:(bcd>>4)*10+(bcd&15),
    boosting:!!this.get(0x4b36),throttle:!!this.get(0x54b2),damage:this.get(0x4ad7)/120*100,
-   wreck:!!this.get(0x4b28),impact:this.get(0x5468)/8};
+   wreck:!!this.get(0x4b28),impact:this.get(0x5468)/8,
+   offRoadGround:!!(this.get(0x4b27)&128),suspension:[0,1].map(i=>signed(this.get(0x4b39+i)|(this.get(0x4b3c+i)<<8)))};
  }
  recoveryTarget() {
   const pc=this.call(0x4097,{},[0x40da,0x3fe9]);

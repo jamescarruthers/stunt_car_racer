@@ -25,6 +25,36 @@ const browser=await chromium.launch({headless:true,executablePath:process.env.CH
 page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
 await page.goto(targetUrl||(server?`http://127.0.0.1:${server.address().port}${basePath}`:'http://127.0.0.1:5173'));await page.waitForFunction(()=>window.__scr);await page.screenshot({path:'analysis/menu-browser.png'});
 if(await page.locator('#physics').inputValue()!=='dos'||await page.evaluate(()=>window.__scr.physics.backend)!=='dos')errors.push('Fresh browser did not default to DOS physics');
+if(process.argv.includes('--presentation-only')) {
+ await page.keyboard.press('Enter');
+ await page.waitForFunction(()=>window.__scr.state.screen==='drivers');
+ if(!await page.locator('#screen-action').isVisible())errors.push('Driver page has no visible continue control');
+ await page.screenshot({path:'analysis/drivers-page.png'});
+ await page.locator('#screen-action').click();
+ await page.waitForFunction(()=>window.__scr.state.screen==='preview');await page.keyboard.press('Escape');
+ await page.keyboard.press('ArrowDown');await page.keyboard.press('Enter');await page.keyboard.press('Enter');await page.keyboard.press('Enter');
+ for(const backend of ['dos','amiga']) {
+  if(await page.locator('#physics').inputValue()!==backend)await page.locator('#physics').selectOption(backend);
+  await page.waitForFunction(()=>window.__scr.state.car.grounded&&!window.__scr.state.car.recovery,{},{timeout:15000});
+  await page.waitForTimeout(500);
+  await page.screenshot({path:`analysis/wheels-${backend}.png`});
+  const before=await page.evaluate(()=>window.__scr.presentation);
+  await page.keyboard.down('ArrowUp');await page.waitForTimeout(2000);await page.keyboard.down('ArrowLeft');
+  await page.waitForFunction(()=>window.__scr.presentation.dustParticles>0&&window.__scr.presentation.dustTop<90,{},{timeout:20000});
+  await page.keyboard.press('KeyP');await page.keyboard.up('ArrowUp');await page.keyboard.up('ArrowLeft');
+  const impact=await page.evaluate(()=>({state:window.__scr.state,presentation:window.__scr.presentation}));
+  if(impact.presentation.wheelPhase===before.wheelPhase)errors.push(`${backend} wheels did not rotate`);
+  if(impact.presentation.wheelY.every((y,i)=>y===before.wheelY[i]))errors.push(`${backend} wheel suspension did not move`);
+  for(const full of [false,true]) {
+   if(await page.evaluate(()=>window.__scr.renderer.fullResolution)!==full)await page.keyboard.press('KeyG');
+   await page.screenshot({path:`analysis/dust-${backend}-${full?'full':'original'}.png`});
+  }
+  const frozen=JSON.stringify(await page.evaluate(()=>window.__scr.presentation));await page.waitForTimeout(150);
+  if(frozen!==JSON.stringify(await page.evaluate(()=>window.__scr.presentation)))errors.push('Pause did not freeze cockpit effects');
+  console.log('Original cockpit effects checked:',backend,impact);
+ }
+ console.log('Errors:',errors);await browser.close();if(server)await new Promise(resolve=>server.close(resolve));process.exit(errors.length?1:0);
+}
 if(process.argv.includes('--boost-only')) {
  await page.keyboard.press('ArrowDown');await page.keyboard.press('Enter');await page.keyboard.press('Enter');await page.keyboard.press('Enter');
  for(const backend of ['amiga','dos']) {
@@ -61,7 +91,7 @@ if(process.argv.includes('--camera-only')) {
 if(process.argv.includes('--dos-season-only')) {
  await page.locator('#screen').focus();
  await page.waitForFunction(()=>window.__scr.physics.backend==='dos'&&!document.querySelector('#physics').disabled);
- await page.keyboard.press('Enter');await page.keyboard.press('Enter');
+ await page.keyboard.press('Enter');await page.keyboard.press('Enter');await page.keyboard.press('Enter');
  await page.waitForFunction(()=>window.__scr.state.car.grounded&&!window.__scr.state.car.recovery,{},{timeout:15000});
  await page.keyboard.down('ArrowUp');await page.waitForTimeout(2000);await page.keyboard.up('ArrowUp');
  const state=await page.evaluate(()=>window.__scr.state);
@@ -130,7 +160,7 @@ for(let id=0;id<8;id++){
  console.log('Track checked:',state.track);
  await page.keyboard.press('Escape');
 }
-await page.keyboard.press('Enter');await page.keyboard.press('Enter');await page.waitForTimeout(200);
+await page.keyboard.press('Enter');await page.keyboard.press('Enter');await page.keyboard.press('Enter');await page.waitForTimeout(200);
 if((await page.evaluate(()=>window.__scr.state)).mode!=='season')errors.push('Season failed to start');
 await page.waitForTimeout(6500);await page.keyboard.down('ArrowUp');await page.waitForTimeout(2000);await page.keyboard.up('ArrowUp');
 if((await page.evaluate(()=>window.__scr.physics)).ticks<40)errors.push('Season simulation stopped');
@@ -177,7 +207,7 @@ await page.waitForFunction(()=>window.__scr.physics.backend==='amiga'&&!document
 if((await page.evaluate(()=>window.__scr.physics.stepSeconds))!==.12)errors.push('Switching back did not restore Amiga timing');
 await page.locator('#physics').selectOption('dos');
 await page.waitForFunction(()=>window.__scr.physics.backend==='dos'&&!document.querySelector('#physics').disabled);
-await page.keyboard.press('Escape');await page.keyboard.press('Enter');await page.keyboard.press('Enter');
+await page.keyboard.press('Escape');await page.keyboard.press('Enter');await page.keyboard.press('Enter');await page.keyboard.press('Enter');
 await page.waitForFunction(()=>window.__scr.state.car.grounded&&!window.__scr.state.car.recovery,{},{timeout:15000});
 await page.keyboard.down('ArrowUp');await page.waitForTimeout(2000);await page.keyboard.up('ArrowUp');
 if((await page.evaluate(()=>window.__scr.state)).mode!=='season')errors.push('DOS season did not start');

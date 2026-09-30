@@ -161,6 +161,16 @@ npm test
 
 Images are 320×200, four bitplanes. Uncompressed screens interleave four 16-bit words per group of 16 pixels. Compressed images use ByteRun-style packets independently for each 40-byte bitplane row: 0…127 copy `n+1` bytes, 129…255 repeat the following byte `257-n` times, and 128 is a no-op. The palette's three-bit channel values are expanded with the game's shift-and-set-low-bit operation to `[0,51,85,119,153,187,221,255]`.
 
+### Cockpit wheels, ground dust and driver portraits
+
+The uncompressed graphics-object atlas at payload offset `0x5BEB6` uses the cockpit palette at `0x11A84`, with colour index 1 transparent. `cockpit-sprites.png` retains its original pixels. The 52 sixteen-byte records at `0x5BA6C` specify source rectangles and destination positions: objects 0–5 are three tyre frames per side; objects 29–36 are eight dust clouds. `cockpit-effects.json` also preserves the eight dust X offsets and sixteen-entry frame sequence at `0x5289C`.
+
+The native Amiga wheel drawing routine at machine address `0x5E778` converts suspension values through the sine lookup at payload offset `0xE342`. Its screen-height conversion is `135 - (lookup[255 - (clamp(suspension + 256, 0, 2047) >> 3)] >> 11)`, with left/right X positions 32/256 and the image cropped at screen Y 159. The browser comparison executes this original drawing routine across compressed and extended suspension values. Amiga suspension is read from machine addresses `0x1BD14/0x1BD16`; DOS uses the split low/high byte arrays at data-segment offsets `0x4B39/0x4B3C`.
+
+Native off-road flags (Amiga `0x1BB9C`, DOS `0x4B27`, bit 7) plus wheel contact trigger dust. The browser follows the original sixteen-particle layout, outward/upward launch and integer gravity, using the extracted shapes and frame sequence. Its separate random sequence, speed conversion and wheel rotation timing are presentation adaptations, not execution of the original graphics loop. These effects never write native physics state.
+
+Portrait source positions and driver mapping come from payload offsets `0x4A3A4` and `0x4A420`. The driver screen rearranges the original twelve 80×55 tiles to show the current browser league roster beneath the original division headers, marking the player's helmet portrait **YOU**. It appears before entering a season and through the main menu's **Drivers / Divisions** item.
+
 Sample records contain an absolute address, byte length, Paula period and volume. WAV files preserve every signed 8-bit sample, translated to unsigned WAV PCM by XOR with `0x80`. Sample rate is rounded from `3546895 / period`; the rounding is a container conversion, not a claim of cycle-exact audio.
 
 Mountain shapes consist of coordinate words and edge/polygon records. Negative coordinate words are placeholders read from a secondary parameter stream. Faces refer to edge indices; extraction walks those edges into vertex cycles. The Three.js horizon uses these polygons and azimuths with a distant perspective placement; the original screen projection differs.

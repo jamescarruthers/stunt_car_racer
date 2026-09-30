@@ -8,9 +8,10 @@ import {SimulationClock} from './simulation-clock.js';
 import {WorldRenderer} from './renderer.js';
 import {GameAudio} from './audio.js';
 import {League} from './league.js';
+import {CockpitEffects} from './cockpit-effects.js';
 const canvas=document.querySelector('#screen'),ctx=canvas.getContext('2d',{alpha:false});ctx.imageSmoothingEnabled=false;
 const keys=new Set(),audio=new GameAudio(),images={},touchKeys=new Set();
-let tracks,palette,font,primary,world,track,car,rival,scenery,config,machine;
+let tracks,palette,font,primary,world,track,car,rival,scenery,config,machine,cockpitEffects,effectsData,displayLeague,driversReturn='home';
 const simulationClock=new SimulationClock();
 let screen='home',selection=0,buttons=[],elapsed=0,lastTime=0,paused=false,mode='practice',selectedTrack=0,superLeague=false,result=null,league=null,countdown=0;
 let save;try{save=JSON.parse(localStorage.getItem('scr-1989-v1')||'{}');}catch{save={};}
@@ -75,15 +76,17 @@ function text(str,x,y,color='#fff',align='left',small=false) {
 const rect=(x,y,w,h,color)=>{ctx.fillStyle=color;ctx.fillRect(x,y,w,h);};
 const time=t=>!Number.isFinite(t)?'--:--.--':`${Math.floor(t/60).toString().padStart(2,'0')}:${(t%60).toFixed(2).padStart(5,'0')}`;
 function menu(items){buttons=items;selection=clamp(selection,0,items.length-1);const el=document.querySelector('#accessible-menu');el.replaceChildren(...items.map((item,i)=>{const b=document.createElement('button');b.textContent=item.label;b.onclick=()=>{selection=i;activate();};return b;}));}
-function switchScreen(next){screen=next;selection=0;keys.clear();touchKeys.clear();paused=false;simulationClock.reset();canvas.focus({preventScroll:true});announce(next==='home'?'Main menu':next==='tracks'?'Choose a track':next==='preview'?track.name:next);setMenu();}
+function switchScreen(next){screen=next;selection=0;keys.clear();touchKeys.clear();paused=false;simulationClock.reset();canvas.focus({preventScroll:true});document.querySelector('#screen-action').hidden=next!=='drivers';announce(next==='home'?'Main menu':next==='tracks'?'Choose a track':next==='preview'?track.name:next);setMenu();}
 function setMenu(){
  if(screen==='home')menu([
-  {label:league?'CONTINUE SEASON':'START A SEASON',x:36,y:81,w:216,h:15,action:()=>{mode='season';if(!league)league=new League(config);selectedTrack=seasonTrack();showPreview();}},
-  {label:'PRACTICE',x:36,y:105,w:216,h:15,action:()=>{mode='practice';switchScreen('tracks');}},
-  {label:'LAP RECORDS',x:36,y:129,w:216,h:15,action:()=>switchScreen('records')},
-  {label:`${superLeague?'SUPER':'STANDARD'} LEAGUE`,x:36,y:153,w:216,h:15,action:()=>{superLeague=!superLeague;setMenu();}},
-  {label:'CONTROLS',x:36,y:177,w:216,h:15,action:()=>switchScreen('help')}
+  {label:league?'CONTINUE SEASON':'START A SEASON',x:36,y:79,w:216,h:15,action:()=>{mode='season';if(!league)league=new League(config);selectedTrack=seasonTrack();showDrivers('preview');}},
+  {label:'PRACTICE',x:36,y:99,w:216,h:15,action:()=>{mode='practice';switchScreen('tracks');}},
+  {label:'LAP RECORDS',x:36,y:119,w:216,h:15,action:()=>switchScreen('records')},
+  {label:'DRIVERS / DIVISIONS',x:36,y:139,w:216,h:15,action:()=>showDrivers('home')},
+  {label:`${superLeague?'SUPER':'STANDARD'} LEAGUE`,x:36,y:159,w:216,h:15,action:()=>{superLeague=!superLeague;setMenu();}},
+  {label:'CONTROLS',x:36,y:179,w:216,h:15,action:()=>switchScreen('help')}
  ]);
+ else if(screen==='drivers')menu([{label:driversReturn==='preview'?'CONTINUE TO TRACK':'BACK',x:0,y:0,w:320,h:200,action:()=>driversReturn==='preview'?showPreview():switchScreen(driversReturn)}]);
  else if(screen==='tracks')menu([...tracks.map((t,i)=>({label:t.name,x:36,y:70+i*13,w:216,h:12,action:()=>{selectedTrack=i;showPreview();}})),{label:'BACK',x:115,y:182,w:90,h:12,action:()=>switchScreen('home')}]);
  else if(screen==='preview')menu([{label:mode==='practice'?'START PRACTICE':'START RACE',x:79,y:165,w:162,h:20,action:startRace},{label:'BACK',x:7,y:186,w:65,h:13,action:()=>switchScreen(mode==='practice'?'tracks':'home')}]);
  else if(screen==='result')menu([{label:mode==='season'?'CONTINUE':'TRY AGAIN',x:89,y:163,w:142,h:16,action:()=>{if(mode==='season'){finishSeasonRace();}else startRace();}},{label:'MAIN MENU',x:99,y:184,w:122,h:13,action:()=>{if(mode==='season')finishSeasonRace(false);else switchScreen('home');}}]);
@@ -92,9 +95,11 @@ function setMenu(){
  else menu([{label:'BACK',x:115,y:181,w:90,h:15,action:()=>switchScreen('home')}]);
 }
 function seasonTrack(){return league.track;}
+function showDrivers(next){driversReturn=next;displayLeague=league||new League(config);switchScreen('drivers');announce('Drivers and divisions. Press Enter, Space, or tap to continue.');}
 function showPreview(){track=new Track(tracks[selectedTrack]);world.loadTrack(track);switchScreen('preview');}
 function startRace(){
  track=new Track(tracks[selectedTrack]);world.loadTrack(track);car=new OriginalCar(track,machine,{practice:mode==='practice',superLeague});rival=mode==='season'?new Rival(track,4-league.division,car.progress):null;
+ cockpitEffects.reset();cockpitEffects.update(car,0);
  simulationClock.stepSeconds=machine.stepSeconds;
  countdown=0;result=null;switchScreen('race');audio.start().catch(console.warn);announce(`${mode==='practice'?'Practice':'Race'} on ${track.name}. Arrow up to accelerate; space to boost.`);
 }
@@ -109,6 +114,14 @@ function menuBackdrop(){ctx.drawImage(images.menu,0,0);rect(32,70,224,130,'#7777
 function panel(title){rect(0,0,320,200,'#005555');rect(8,8,304,184,'#000');rect(10,10,300,2,'#bbb');text(title,160,22,colors.yellow,'center');}
 function drawHome(){menuBackdrop();drawMenuButtons();}
 function drawTracks(){menuBackdrop();rect(32,68,224,130,'#003333');text('PRACTICE - SELECT TRACK',160,55,colors.yellow,'center',true);drawMenuButtons();}
+function drawDrivers(){
+ ctx.drawImage(images.drivers,0,0);
+ displayLeague.roster.forEach((members,level)=>members.forEach((id,row)=>{
+  const p=effectsData.portraits[id==='YOU'?11:id],x=(3-level)*80,y=12+row*55;
+  ctx.drawImage(images.drivers,p.x,p.y,p.width,p.height,x,y,p.width,p.height);
+  if(id==='YOU'){rect(x+3,y+44,74,9,'#000');text('YOU',x+40,y+44,colors.yellow,'center',true);}
+ }));
+}
 function drawPreview(){
  ctx.drawImage(images.preview,0,0);const rendered=world.render(null,null,1,true,elapsed);ctx.drawImage(rendered,9,20,302,124);
  rect(10,8,300,12,'#000');text(track.name,160,10,colors.yellow,'center');
@@ -116,6 +129,8 @@ function drawPreview(){
  drawMenuButtons();
 }
 function drawHUD(){
+ cockpitEffects.drawDust(ctx,images['cockpit-sprites']);
+ cockpitEffects.drawWheels(ctx,images['cockpit-sprites'],simulationClock.alpha);
  ctx.drawImage(images.cockpitOverlay,0,0);
  // Every cockpit pixel comes from the disk; only changing instruments are drawn here.
  rect(37,178,48,7,'#bbb');rect(37,189,48,8,'#bbb');
@@ -154,8 +169,10 @@ function update(dt){
   car.step(dt,input());
   if(rival){rival.speed=machine.opponentSpeed;rival.step(dt,car);machine.setOpponent(track,rival);}
  }
+ cockpitEffects.update(car,dt);
  for(const event of car.events.splice(0)){
   if(event==='land')audio.play(3,Math.min(1,.2+car.shake*.5));
+  if(event==='ground-impact'){audio.play(3,.7);audio.play(6,.5);}
   if(event==='recover')audio.play(1,.3);
   if(event==='lap'){
    audio.play(0,.5);const key=recordKey(track.id);
@@ -168,7 +185,7 @@ function frame(ms){const dt=lastTime?Math.min(.25,Math.max(0,(ms-lastTime)/1000)
  if(screen==='race'&&!paused)simulationClock.advance(dt,update);
  if(renderPixelRatio!==(window.devicePixelRatio||1))resizeRendering();
  ctx.imageSmoothingEnabled=false;
- if(screen==='home')drawHome();else if(screen==='tracks')drawTracks();else if(screen==='preview')drawPreview();else if(screen==='race')drawRace();else if(screen==='records')drawRecords();else if(screen==='help')drawHelp();else if(screen==='result')drawResult();else if(screen==='season')drawSeason();
+ if(screen==='home')drawHome();else if(screen==='tracks')drawTracks();else if(screen==='drivers')drawDrivers();else if(screen==='preview')drawPreview();else if(screen==='race')drawRace();else if(screen==='records')drawRecords();else if(screen==='help')drawHelp();else if(screen==='result')drawResult();else if(screen==='season')drawSeason();
  audio.engine(car,screen==='race'&&!paused&&!!car);requestAnimationFrame(frame);
 }
 function pause(){if(screen==='race'){paused=!paused;keys.clear();touchKeys.clear();announce(paused?'Paused':'Resumed');}}
@@ -192,14 +209,16 @@ canvas.addEventListener('pointermove',e=>{const r=canvas.getBoundingClientRect()
 canvas.addEventListener('pointerdown',e=>{canvas.focus();const r=canvas.getBoundingClientRect(),x=(e.clientX-r.left)*320/r.width,y=(e.clientY-r.top)*200/r.height;const i=buttons.findIndex(b=>x>=b.x&&x<=b.x+b.w&&y>=b.y&&y<=b.y+b.h);if(i>=0){selection=i;activate();}});
 for(const b of document.querySelectorAll('[data-key]')){b.addEventListener('pointerdown',e=>{e.preventDefault();b.setPointerCapture(e.pointerId);touchKeys.add(b.dataset.key);audio.start().catch(console.warn);});for(const event of ['pointerup','pointercancel','lostpointercapture'])b.addEventListener(event,()=>touchKeys.delete(b.dataset.key));}
 document.querySelector('#sound').onclick=toggleSound;document.querySelector('#fullscreen').onclick=fullscreen;document.querySelector('#graphics').onclick=toggleResolution;document.querySelector('#help').onclick=()=>{audio.engine(car,false);switchScreen('help');};
+document.querySelector('#screen-action').onclick=activate;
 new ResizeObserver(resizeRendering).observe(canvas);
 window.addEventListener('resize',resizeRendering);
 async function init(){
  const select=document.querySelector('#physics');select.value=physicsBackend;
  const originalReady=getMachine(physicsBackend);
  const json=async name=>{const r=await fetch(`assets/${name}.json`);if(!r.ok)throw new Error(`Could not load ${name}`);return r.json();};
- [tracks,palette,font,primary,scenery,config]=await Promise.all([json('tracks'),json('palette'),fetch('assets/font.bin').then(r=>r.arrayBuffer()).then(b=>new Uint8Array(b)),fetch('assets/primary-font.bin').then(r=>r.arrayBuffer()).then(b=>new Uint8Array(b)),json('scenery'),json('config')]);
- await Promise.all(['cockpit','menu','preview','standings','wreck','won','lost','promotion'].map(async name=>{const i=new Image();i.src=`assets/${name}.png`;await i.decode();images[name]=i;}));
+ [tracks,palette,font,primary,scenery,config,effectsData]=await Promise.all([json('tracks'),json('palette'),fetch('assets/font.bin').then(r=>r.arrayBuffer()).then(b=>new Uint8Array(b)),fetch('assets/primary-font.bin').then(r=>r.arrayBuffer()).then(b=>new Uint8Array(b)),json('scenery'),json('config'),json('cockpit-effects')]);
+ cockpitEffects=new CockpitEffects(effectsData);
+ await Promise.all(['cockpit','cockpit-sprites','drivers','menu','preview','standings','wreck','won','lost','promotion'].map(async name=>{const i=new Image();i.src=`assets/${name}.png`;await i.decode();images[name]=i;}));
  const c=document.createElement('canvas');c.width=320;c.height=200;const cx=c.getContext('2d');cx.drawImage(images.cockpit,0,0);const pixels=cx.getImageData(0,0,320,200);
  for(let y=0;y<200;y++)for(let x=0;x<320;x++){const i=(y*320+x)*4;if((pixels.data[i]===153&&pixels.data[i+1]===153&&pixels.data[i+2]===119)||(y<166&&(x<16||x>303)&&pixels.data[i]===85&&pixels.data[i+2]===255))pixels.data[i+3]=0;}
  cx.putImageData(pixels,0,0);images.cockpitOverlay=c;
@@ -210,6 +229,6 @@ async function init(){
  if(save.league&&Number.isInteger(save.league.division)&&save.league.division>=1&&save.league.division<=4)league=new League(config,save.league);
  document.querySelector('#loading').remove();switchScreen('home');requestAnimationFrame(frame);
  // Inspection hook: read-only snapshots for deterministic browser smoke checks.
- window.__scr={get state(){return {screen,paused,mode,track:track?.name,car:car?{...car.snapshot(),speed:car.speed,damage:car.damage,boost:car.boost,laps:car.laps,grounded:car.grounded,recovery:car.recovery,countdown}:null};},tracks:tracks.map(t=>({name:t.name,sections:t.pieces.length})),get physics(){return {backend:physicsBackend,engine:machine.engine,stepSeconds:simulationClock.stepSeconds,ticks:machine.ticks,alpha:simulationClock.alpha};},get renderer(){return {engine:'Three.js',revision:world.renderer.constructor.name,calls:world.renderer.info.render.calls,triangles:world.renderer.info.render.triangles,fullResolution,width:world.renderer.domElement.width,height:world.renderer.domElement.height,camera:world.camera.position.toArray()};}};
+ window.__scr={get state(){return {screen,paused,mode,track:track?.name,car:car?{...car.snapshot(),speed:car.speed,damage:car.damage,boost:car.boost,laps:car.laps,grounded:car.grounded,offRoadGround:car.offRoadGround,suspension:[...car.suspension],recovery:car.recovery,countdown}:null};},get presentation(){return {dustParticles:cockpitEffects.particles.length,dustTop:Math.min(128,...cockpitEffects.particles.map(p=>p.y)),wheelY:[...cockpitEffects.wheelY],wheelPhase:cockpitEffects.wheelPhase};},tracks:tracks.map(t=>({name:t.name,sections:t.pieces.length})),get physics(){return {backend:physicsBackend,engine:machine.engine,stepSeconds:simulationClock.stepSeconds,ticks:machine.ticks,alpha:simulationClock.alpha};},get renderer(){return {engine:'Three.js',revision:world.renderer.constructor.name,calls:world.renderer.info.render.calls,triangles:world.renderer.info.render.triangles,fullResolution,width:world.renderer.domElement.width,height:world.renderer.domElement.height,camera:world.camera.position.toArray()};}};
 }
 init().catch(error=>{console.error(error);document.querySelector('#loading').textContent=`Unable to start: ${error.message}. Reload to retry.`;});

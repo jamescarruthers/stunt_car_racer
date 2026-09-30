@@ -20,6 +20,7 @@ export class OriginalCar {
   this.lastPiece=s.section;this.recovery=s.chains?1:0;
   const status=this.machine.drivingStatus();this.nativeStatus=status;
   this.grounded=s.contact&&!status.offRoad;this.contacts=status.contacts;
+  this.offRoadGround=status.offRoadGround&&s.contact&&!s.chains;this.suspension=status.suspension;
   this.boost=status.boost;this.boosting=status.boosting&&!s.chains;this.throttle=status.throttle;
  }
  resetAt(piece,initial=false) {
@@ -40,7 +41,7 @@ export class OriginalCar {
   if(this.finished)return;
   if(input.recover){this.resetAt(this.lastPiece);return;}
   this.previous=this.snapshot();this.time+=dt;this.shake=Math.max(0,this.shake-dt*5);
-  const wasGrounded=this.grounded,wasOnChains=this.recovery>0;
+  const wasGrounded=this.grounded,wasOnChains=this.recovery>0,wasOnGround=this.offRoadGround;
   // Local +X is left in the Three.js cockpit. Opposing steering keys cancel.
   const steer=(input.left?1:0)-(input.right?1:0);
   const fire=!!input.boost||(wasOnChains&&this.autoRelease);
@@ -54,6 +55,7 @@ export class OriginalCar {
   const m=this.machine,status=this.nativeStatus;
   this.damage=status.wreck?100:clamp(status.damage,0,100);
   if(!wasGrounded&&this.grounded&&!wasOnChains){this.shake=Math.min(2,status.impact);this.events.push('land');}
+  if(!wasOnGround&&this.offRoadGround&&!wasOnChains){this.shake=Math.min(2,status.impact);this.events.push('ground-impact');}
   if(this.damage>=100){this.finished=true;this.events.push('wreck');}
   if(!status.offRoad&&!this.recovery) {
    this.fallTime=0;

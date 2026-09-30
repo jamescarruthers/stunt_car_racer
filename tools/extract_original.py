@@ -59,6 +59,30 @@ picture('menu',0x15552,0x15532,False)
 picture('preview',0x1d294,0x1d274)
 picture('standings',0x224f0,0x224d0)
 picture('drivers',0x27396,0x27376,False)
+# Original graphics-object atlas: tyre frames, flames, damage and dust.
+# The game's bitmap loader treats palette index 1 as transparent.
+sprites=picture('cockpit-sprites',0x5beb6,0x11a84,False).convert('RGBA')
+transparent=palette(0x11a84)[1]
+sprites.putdata([(*pixel[:3],0 if pixel[:3]==transparent else 255) for pixel in sprites.getdata()])
+sprites.save(out/'cockpit-sprites.png')
+manifest['assets'][-1]['transparentIndex']=1
+objects=[]
+for i in range(52):
+ x,y,w,h,dx,dy,_,_=struct.unpack_from('>8H',b,0x5ba6c+i*16)
+ objects.append({'x':x*16,'y':y,'width':(w+1)*16,'height':h+1,'screenX':dx*16,'screenY':dy})
+portraits=[]
+for i in range(12):
+ offset=long(0x4a3a4+4*b[0x4a420+i])
+ portraits.append({'x':offset%160*2,'y':offset//160,'width':80,'height':55})
+effects={'objects':objects,'portraits':portraits,
+ 'dustOffsets':[word(0x5289c+2*i) for i in range(8)],
+ 'dustSequence':list(b[0x528ac:0x528bc]),
+ 'wheelLift':[word(0xe342+2*i)>>11 for i in range(256)]}
+(out/'cockpit-effects.json').write_text(json.dumps(effects))
+for p,n,description in [(0x5ba6c,52*16,'graphics-object source rectangles and screen positions'),
+ (0x5289c,32,'dust offsets and animation sequence'),(0xe342,512,'wheel suspension lookup'),
+ (0x4a3a4,136,'portrait source positions and driver mapping')]:
+ record('cockpit-effects.json',p,n,format=description)
 for name,p in [('wreck',0x2f0b6),('won',0x3607c),('lost',0x3c83e),('promotion',0x4274c)]:
  picture(name,p+34,p+2,b[p]>=128)
 # Palette is kept as exact expanded 9-bit Amiga RGB values.
