@@ -1,0 +1,1114 @@
+{
+  "sourceSha256": "e26ba7f00fe4f37cb256087518f31dd7fa6ca3250b511c37c3eae3b9eb27015e",
+  "loader": {
+    "bytesCompared": 264742,
+    "byteExact": true,
+    "readSizes": [
+      32768,
+      32768,
+      32768,
+      32768,
+      32768,
+      32768,
+      32768,
+      32768,
+      2598,
+      0
+    ],
+    "entryPhysicalAddress": 67648,
+    "farReturnStackFileOffset": 100312,
+    "instructionsPatched": 0
+  },
+  "calibration": [
+    {
+      "seededLoopCount": 64,
+      "coefficient": 65535,
+      "integrationMultiplier": 32767,
+      "suspensionMultiplier": 64
+    },
+    {
+      "seededLoopCount": 256,
+      "coefficient": 65535,
+      "integrationMultiplier": 32767,
+      "suspensionMultiplier": 64
+    },
+    {
+      "seededLoopCount": 1024,
+      "coefficient": 65535,
+      "integrationMultiplier": 32767,
+      "suspensionMultiplier": 64
+    },
+    {
+      "seededLoopCount": 4096,
+      "coefficient": 34316,
+      "integrationMultiplier": 17158,
+      "suspensionMultiplier": 122
+    },
+    {
+      "seededLoopCount": 8192,
+      "coefficient": 25711,
+      "integrationMultiplier": 12855,
+      "suspensionMultiplier": 163
+    }
+  ],
+  "integration": [
+    {
+      "coefficient": 25711,
+      "input": -16384,
+      "output": -6427,
+      "idealTruncatedScale": -6427
+    },
+    {
+      "coefficient": 25711,
+      "input": -2048,
+      "output": -803,
+      "idealTruncatedScale": -803
+    },
+    {
+      "coefficient": 25711,
+      "input": -317,
+      "output": -125,
+      "idealTruncatedScale": -124
+    },
+    {
+      "coefficient": 25711,
+      "input": -1,
+      "output": -1,
+      "idealTruncatedScale": 0
+    },
+    {
+      "coefficient": 25711,
+      "input": 0,
+      "output": 0,
+      "idealTruncatedScale": 0
+    },
+    {
+      "coefficient": 25711,
+      "input": 1,
+      "output": 0,
+      "idealTruncatedScale": 0
+    },
+    {
+      "coefficient": 25711,
+      "input": 317,
+      "output": 124,
+      "idealTruncatedScale": 124
+    },
+    {
+      "coefficient": 25711,
+      "input": 2048,
+      "output": 802,
+      "idealTruncatedScale": 803
+    },
+    {
+      "coefficient": 25711,
+      "input": 16384,
+      "output": 6426,
+      "idealTruncatedScale": 6427
+    },
+    {
+      "coefficient": 32768,
+      "input": -16384,
+      "output": -8192,
+      "idealTruncatedScale": -8192
+    },
+    {
+      "coefficient": 32768,
+      "input": -2048,
+      "output": -1024,
+      "idealTruncatedScale": -1024
+    },
+    {
+      "coefficient": 32768,
+      "input": -317,
+      "output": -159,
+      "idealTruncatedScale": -158
+    },
+    {
+      "coefficient": 32768,
+      "input": -1,
+      "output": -1,
+      "idealTruncatedScale": 0
+    },
+    {
+      "coefficient": 32768,
+      "input": 0,
+      "output": 0,
+      "idealTruncatedScale": 0
+    },
+    {
+      "coefficient": 32768,
+      "input": 1,
+      "output": 0,
+      "idealTruncatedScale": 0
+    },
+    {
+      "coefficient": 32768,
+      "input": 317,
+      "output": 158,
+      "idealTruncatedScale": 158
+    },
+    {
+      "coefficient": 32768,
+      "input": 2048,
+      "output": 1024,
+      "idealTruncatedScale": 1024
+    },
+    {
+      "coefficient": 32768,
+      "input": 16384,
+      "output": 8192,
+      "idealTruncatedScale": 8192
+    },
+    {
+      "coefficient": 60928,
+      "input": -16384,
+      "output": -15232,
+      "idealTruncatedScale": -15232
+    },
+    {
+      "coefficient": 60928,
+      "input": -2048,
+      "output": -1904,
+      "idealTruncatedScale": -1904
+    },
+    {
+      "coefficient": 60928,
+      "input": -317,
+      "output": -295,
+      "idealTruncatedScale": -294
+    },
+    {
+      "coefficient": 60928,
+      "input": -1,
+      "output": -1,
+      "idealTruncatedScale": 0
+    },
+    {
+      "coefficient": 60928,
+      "input": 0,
+      "output": 0,
+      "idealTruncatedScale": 0
+    },
+    {
+      "coefficient": 60928,
+      "input": 1,
+      "output": 0,
+      "idealTruncatedScale": 0
+    },
+    {
+      "coefficient": 60928,
+      "input": 317,
+      "output": 294,
+      "idealTruncatedScale": 294
+    },
+    {
+      "coefficient": 60928,
+      "input": 2048,
+      "output": 1904,
+      "idealTruncatedScale": 1904
+    },
+    {
+      "coefficient": 60928,
+      "input": 16384,
+      "output": 15232,
+      "idealTruncatedScale": 15232
+    },
+    {
+      "coefficient": 65535,
+      "input": -16384,
+      "output": -16383,
+      "idealTruncatedScale": -16383
+    },
+    {
+      "coefficient": 65535,
+      "input": -2048,
+      "output": -2047,
+      "idealTruncatedScale": -2047
+    },
+    {
+      "coefficient": 65535,
+      "input": -317,
+      "output": -317,
+      "idealTruncatedScale": -316
+    },
+    {
+      "coefficient": 65535,
+      "input": -1,
+      "output": -1,
+      "idealTruncatedScale": 0
+    },
+    {
+      "coefficient": 65535,
+      "input": 0,
+      "output": 0,
+      "idealTruncatedScale": 0
+    },
+    {
+      "coefficient": 65535,
+      "input": 1,
+      "output": 0,
+      "idealTruncatedScale": 0
+    },
+    {
+      "coefficient": 65535,
+      "input": 317,
+      "output": 316,
+      "idealTruncatedScale": 316
+    },
+    {
+      "coefficient": 65535,
+      "input": 2048,
+      "output": 2046,
+      "idealTruncatedScale": 2047
+    },
+    {
+      "coefficient": 65535,
+      "input": 16384,
+      "output": 16382,
+      "idealTruncatedScale": 16383
+    }
+  ],
+  "suspension": [
+    {
+      "coefficient": 25711,
+      "depth": 0,
+      "change": -256,
+      "output": -652
+    },
+    {
+      "coefficient": 25711,
+      "depth": 0,
+      "change": 0,
+      "output": 0
+    },
+    {
+      "coefficient": 25711,
+      "depth": 0,
+      "change": 256,
+      "output": 652
+    },
+    {
+      "coefficient": 25711,
+      "depth": 128,
+      "change": -256,
+      "output": -524
+    },
+    {
+      "coefficient": 25711,
+      "depth": 128,
+      "change": 0,
+      "output": 128
+    },
+    {
+      "coefficient": 25711,
+      "depth": 128,
+      "change": 256,
+      "output": 780
+    },
+    {
+      "coefficient": 25711,
+      "depth": 317,
+      "change": -256,
+      "output": -335
+    },
+    {
+      "coefficient": 25711,
+      "depth": 317,
+      "change": 0,
+      "output": 317
+    },
+    {
+      "coefficient": 25711,
+      "depth": 317,
+      "change": 256,
+      "output": 969
+    },
+    {
+      "coefficient": 25711,
+      "depth": 1024,
+      "change": -256,
+      "output": 372
+    },
+    {
+      "coefficient": 25711,
+      "depth": 1024,
+      "change": 0,
+      "output": 1024
+    },
+    {
+      "coefficient": 25711,
+      "depth": 1024,
+      "change": 256,
+      "output": 1676
+    },
+    {
+      "coefficient": 32768,
+      "depth": 0,
+      "change": -256,
+      "output": -512
+    },
+    {
+      "coefficient": 32768,
+      "depth": 0,
+      "change": 0,
+      "output": 0
+    },
+    {
+      "coefficient": 32768,
+      "depth": 0,
+      "change": 256,
+      "output": 512
+    },
+    {
+      "coefficient": 32768,
+      "depth": 128,
+      "change": -256,
+      "output": -384
+    },
+    {
+      "coefficient": 32768,
+      "depth": 128,
+      "change": 0,
+      "output": 128
+    },
+    {
+      "coefficient": 32768,
+      "depth": 128,
+      "change": 256,
+      "output": 640
+    },
+    {
+      "coefficient": 32768,
+      "depth": 317,
+      "change": -256,
+      "output": -195
+    },
+    {
+      "coefficient": 32768,
+      "depth": 317,
+      "change": 0,
+      "output": 317
+    },
+    {
+      "coefficient": 32768,
+      "depth": 317,
+      "change": 256,
+      "output": 829
+    },
+    {
+      "coefficient": 32768,
+      "depth": 1024,
+      "change": -256,
+      "output": 512
+    },
+    {
+      "coefficient": 32768,
+      "depth": 1024,
+      "change": 0,
+      "output": 1024
+    },
+    {
+      "coefficient": 32768,
+      "depth": 1024,
+      "change": 256,
+      "output": 1536
+    },
+    {
+      "coefficient": 60928,
+      "depth": 0,
+      "change": -256,
+      "output": -276
+    },
+    {
+      "coefficient": 60928,
+      "depth": 0,
+      "change": 0,
+      "output": 0
+    },
+    {
+      "coefficient": 60928,
+      "depth": 0,
+      "change": 256,
+      "output": 276
+    },
+    {
+      "coefficient": 60928,
+      "depth": 128,
+      "change": -256,
+      "output": -148
+    },
+    {
+      "coefficient": 60928,
+      "depth": 128,
+      "change": 0,
+      "output": 128
+    },
+    {
+      "coefficient": 60928,
+      "depth": 128,
+      "change": 256,
+      "output": 404
+    },
+    {
+      "coefficient": 60928,
+      "depth": 317,
+      "change": -256,
+      "output": 41
+    },
+    {
+      "coefficient": 60928,
+      "depth": 317,
+      "change": 0,
+      "output": 317
+    },
+    {
+      "coefficient": 60928,
+      "depth": 317,
+      "change": 256,
+      "output": 593
+    },
+    {
+      "coefficient": 60928,
+      "depth": 1024,
+      "change": -256,
+      "output": 748
+    },
+    {
+      "coefficient": 60928,
+      "depth": 1024,
+      "change": 0,
+      "output": 1024
+    },
+    {
+      "coefficient": 60928,
+      "depth": 1024,
+      "change": 256,
+      "output": 1300
+    },
+    {
+      "coefficient": 65535,
+      "depth": 0,
+      "change": -256,
+      "output": -256
+    },
+    {
+      "coefficient": 65535,
+      "depth": 0,
+      "change": 0,
+      "output": 0
+    },
+    {
+      "coefficient": 65535,
+      "depth": 0,
+      "change": 256,
+      "output": 256
+    },
+    {
+      "coefficient": 65535,
+      "depth": 128,
+      "change": -256,
+      "output": -128
+    },
+    {
+      "coefficient": 65535,
+      "depth": 128,
+      "change": 0,
+      "output": 128
+    },
+    {
+      "coefficient": 65535,
+      "depth": 128,
+      "change": 256,
+      "output": 384
+    },
+    {
+      "coefficient": 65535,
+      "depth": 317,
+      "change": -256,
+      "output": 61
+    },
+    {
+      "coefficient": 65535,
+      "depth": 317,
+      "change": 0,
+      "output": 317
+    },
+    {
+      "coefficient": 65535,
+      "depth": 317,
+      "change": 256,
+      "output": 573
+    },
+    {
+      "coefficient": 65535,
+      "depth": 1024,
+      "change": -256,
+      "output": 768
+    },
+    {
+      "coefficient": 65535,
+      "depth": 1024,
+      "change": 0,
+      "output": 1024
+    },
+    {
+      "coefficient": 65535,
+      "depth": 1024,
+      "change": 256,
+      "output": 1280
+    }
+  ],
+  "recovery": [
+    {
+      "track": "LITTLE RAMP",
+      "sections": 44,
+      "forbidden": [
+        1,
+        34
+      ],
+      "selectedBySection": [
+        0,
+        0,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        10,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        24,
+        24,
+        24,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        33,
+        35,
+        36,
+        37,
+        38,
+        39,
+        39,
+        39,
+        39,
+        43
+      ]
+    },
+    {
+      "track": "STEPPING STONES",
+      "sections": 56,
+      "forbidden": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        47,
+        5
+      ],
+      "selectedBySection": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10,
+        10,
+        10,
+        13,
+        14,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        23,
+        24,
+        24,
+        24,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        38,
+        38,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        46,
+        48,
+        49,
+        50,
+        51,
+        52,
+        52,
+        52,
+        55
+      ]
+    },
+    {
+      "track": "HUMP BACK",
+      "sections": 53,
+      "forbidden": [
+        38
+      ],
+      "selectedBySection": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        9,
+        9,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        23,
+        23,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        34,
+        34,
+        37,
+        37,
+        39,
+        40,
+        40,
+        42,
+        43,
+        43,
+        45,
+        46,
+        47,
+        48,
+        48,
+        48,
+        51,
+        52
+      ]
+    },
+    {
+      "track": "BIG RAMP",
+      "sections": 44,
+      "forbidden": [
+        16,
+        17,
+        21,
+        22,
+        32,
+        33,
+        34,
+        35
+      ],
+      "selectedBySection": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        10,
+        10,
+        13,
+        14,
+        15,
+        15,
+        15,
+        18,
+        19,
+        20,
+        20,
+        20,
+        23,
+        24,
+        24,
+        24,
+        24,
+        28,
+        29,
+        30,
+        31,
+        31,
+        31,
+        31,
+        31,
+        36,
+        37,
+        38,
+        39,
+        39,
+        39,
+        39,
+        43
+      ]
+    },
+    {
+      "track": "SKI JUMP",
+      "sections": 40,
+      "forbidden": [
+        32
+      ],
+      "selectedBySection": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        10,
+        10,
+        10,
+        14,
+        15,
+        16,
+        16,
+        18,
+        19,
+        20,
+        20,
+        22,
+        23,
+        24,
+        25,
+        25,
+        25,
+        28,
+        29,
+        30,
+        31,
+        31,
+        33,
+        34,
+        35,
+        35,
+        35,
+        35,
+        39
+      ]
+    },
+    {
+      "track": "DRAW BRIDGE",
+      "sections": 78,
+      "forbidden": [
+        4,
+        13,
+        38,
+        51,
+        52,
+        53,
+        54
+      ],
+      "selectedBySection": [
+        0,
+        1,
+        2,
+        3,
+        3,
+        5,
+        6,
+        7,
+        8,
+        8,
+        8,
+        11,
+        12,
+        12,
+        14,
+        15,
+        16,
+        16,
+        16,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        28,
+        28,
+        28,
+        28,
+        33,
+        34,
+        35,
+        36,
+        37,
+        37,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        44,
+        44,
+        47,
+        48,
+        49,
+        50,
+        50,
+        50,
+        50,
+        50,
+        55,
+        56,
+        57,
+        58,
+        58,
+        58,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        72,
+        72,
+        72,
+        72,
+        77
+      ]
+    },
+    {
+      "track": "HIGH JUMP",
+      "sections": 52,
+      "forbidden": [
+        30,
+        31,
+        32,
+        33,
+        34,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "selectedBySection": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        10,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        20,
+        22,
+        23,
+        24,
+        25,
+        25,
+        27,
+        28,
+        29,
+        29,
+        29,
+        29,
+        29,
+        29,
+        29,
+        29,
+        29,
+        29,
+        29,
+        29,
+        29,
+        29,
+        29,
+        29,
+        29,
+        46,
+        47,
+        48,
+        48,
+        48,
+        51
+      ]
+    },
+    {
+      "track": "ROLLER COASTER",
+      "sections": 78,
+      "forbidden": [],
+      "selectedBySection": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        10,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        24,
+        24,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        38,
+        38,
+        38,
+        38,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        52,
+        52,
+        52,
+        52,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        66,
+        66,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        74,
+        74,
+        77
+      ]
+    }
+  ]
+}

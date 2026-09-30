@@ -1,0 +1,7 @@
+{
+  "sourceSha256": "e26ba7f00fe4f37cb256087518f31dd7fa6ca3250b511c37c3eae3b9eb27015e",
+  "scope": "Headless full executable vs extracted code/data, same Unicorn CPU",
+  "comparedBytesPerTick": 105856,
+  "comparedTicks": 25424,
+  "standalonePackagePassed": true
+}

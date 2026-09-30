@@ -1,0 +1,158 @@
+{
+  "image": {
+    "file": "Stunt.img",
+    "bytes": 3145728,
+    "sha256": "0b2a521c3459d42e11bb2398d2062ea203f5e41856bea2e7c6e917c88f48ac95"
+  },
+  "volume": {
+    "partitionType": 6,
+    "startSector": 8,
+    "sectors": 6136,
+    "bytesPerSector": 512,
+    "sectorsPerCluster": 1,
+    "fatCopies": 2,
+    "fatCopiesEqual": true,
+    "clusterCount": 6055
+  },
+  "files": [
+    {
+      "name": "BREAKIT!.ICE",
+      "bytes": 1332,
+      "sha256": "dab9f7e138157a30893ca6ed26cd0e00d7ed78e33ca8d840ef2257aaeb4932ed"
+    },
+    {
+      "name": "CAR.EGA",
+      "bytes": 264742,
+      "sha256": "53d1e5ccc17d18ee1fd4c3f6943ace92fe968ac4bfa28e6282aafebc9669235d"
+    },
+    {
+      "name": "CAR.EXE",
+      "bytes": 1008,
+      "sha256": "a0479cd49a53366cca521e8326fdb0345cdfe3df93f38a63b3cf99bc64dbfb65"
+    },
+    {
+      "name": "FASTEST.FIN",
+      "bytes": 80,
+      "sha256": "f1fbdf6881d79045b8eab6a5f76c404329a9bfa6a3fe3a206b5a4c2f1581ecb1"
+    },
+    {
+      "name": "FILE_ID.DIZ",
+      "bytes": 18,
+      "sha256": "d503d79f1d2308dd4baa41c1be1b3d01bfee196ec7c2a45b4d85d1bc4f87e270"
+    }
+  ],
+  "loaderMZ": {
+    "magic": 23117,
+    "lastPageBytes": 496,
+    "pages": 2,
+    "relocations": 0,
+    "headerParagraphs": 32,
+    "minExtraParagraphs": 0,
+    "maxExtraParagraphs": 65535,
+    "ss": 15,
+    "sp": 256,
+    "checksum": 11119,
+    "ip": 0,
+    "cs": 0,
+    "relocationOffset": 30,
+    "overlay": 0,
+    "declaredBytes": 1008,
+    "entryFileOffset": 512
+  },
+  "decoded": {
+    "file": "CAR-decoded.exe",
+    "bytes": 264742,
+    "sha256": "e26ba7f00fe4f37cb256087518f31dd7fa6ca3250b511c37c3eae3b9eb27015e",
+    "mz": {
+      "magic": 23117,
+      "lastPageBytes": 38,
+      "pages": 518,
+      "relocations": 45,
+      "headerParagraphs": 32,
+      "minExtraParagraphs": 1,
+      "maxExtraParagraphs": 65535,
+      "ss": 6144,
+      "sp": 1500,
+      "checksum": 0,
+      "ip": 0,
+      "cs": 0,
+      "relocationOffset": 34,
+      "overlay": 0,
+      "declaredBytes": 264742,
+      "entryFileOffset": 512
+    }
+  },
+  "amigaMatches": [
+    {
+      "asset": "geometry-tracks-and-league-values",
+      "bytes": 3840,
+      "sha256": "9c4d5dc1652ae267ab578810d24c66f6e50f464b6685947ac64aeecf1d17f4f9",
+      "identical": true,
+      "dosFileOffset": 86144
+    },
+    {
+      "asset": "recovery-template-flags",
+      "bytes": 16,
+      "sha256": "fecd01322cceab55148b2fbbe485edfcfaeb16501e93fec1eae04abc63274f96",
+      "identical": true,
+      "dosFileOffset": 86464
+    },
+    {
+      "asset": "track-0",
+      "bytes": 124,
+      "sha256": "6d4870da92f36de3d64247a2c968014414f519b7a181f800d01ae5c53158f378",
+      "identical": true,
+      "dosFileOffset": 88546
+    },
+    {
+      "asset": "track-1",
+      "bytes": 145,
+      "sha256": "9f5bee5a5229ec1ff92bd888892c4c77b38bb9984315c124f41b5c728848cd50",
+      "identical": true,
+      "dosFileOffset": 88670
+    },
+    {
+      "asset": "track-2",
+      "bytes": 145,
+      "sha256": "2c9ccceff868d1d13eb9a0859ccd49e646fa2c10eea33dd2ab5a3566e262b84a",
+      "identical": true,
+      "dosFileOffset": 88815
+    },
+    {
+      "asset": "track-3",
+      "bytes": 142,
+      "sha256": "7bd05599cb10172746a6ad7b38b8505e32a33b958ecbbc24680562b9616e5df6",
+      "identical": true,
+      "dosFileOffset": 88960
+    },
+    {
+      "asset": "track-4",
+      "bytes": 145,
+      "sha256": "8116674a36fd98410a3c4dbbd30d666f892487aee206a932df12a91ec5086fd3",
+      "identical": true,
+      "dosFileOffset": 89102
+    },
+    {
+      "asset": "track-5",
+      "bytes": 213,
+      "sha256": "a8924863b7a5ed570d6f9db3fa4caccf8f16b579e863814afdcf7bd38a0c8c66",
+      "identical": true,
+      "dosFileOffset": 89247
+    },
+    {
+      "asset": "track-6",
+      "bytes": 142,
+      "sha256": "a8fbced6f4eead69bb47225daa5fbb58f121a15ea68507e99426985892c87f08",
+      "identical": true,
+      "dosFileOffset": 89460
+    },
+    {
+      "asset": "track-7",
+      "bytes": 192,
+      "sha256": "9e8740a7e80ab96b7b4e0c75aa2f72c4e476f4bcea4a848eadfafdedf9dc3ce2",
+      "identical": true,
+      "dosFileOffset": 89602
+    }
+  ],
+  "disassembly": true
+}

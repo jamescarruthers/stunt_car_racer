@@ -1,0 +1,95 @@
+{
+  "tracks": [
+    [
+      "LITTLE RAMP",
+      44,
+      34
+    ],
+    [
+      "STEPPING STONES",
+      56,
+      48
+    ],
+    [
+      "HUMP BACK",
+      53,
+      41
+    ],
+    [
+      "BIG RAMP",
+      44,
+      43
+    ],
+    [
+      "SKI JUMP",
+      40,
+      43
+    ],
+    [
+      "DRAW BRIDGE",
+      78,
+      72
+    ],
+    [
+      "HIGH JUMP",
+      52,
+      44
+    ],
+    [
+      "ROLLER COASTER",
+      78,
+      80
+    ]
+  ],
+  "sounds": [
+    {
+      "id": 0,
+      "period": 150,
+      "volume": 30,
+      "length": 2436
+    },
+    {
+      "id": 1,
+      "period": 180,
+      "volume": 64,
+      "length": 9032
+    },
+    {
+      "id": 2,
+      "period": 238,
+      "volume": 56,
+      "length": 8014
+    },
+    {
+      "id": 3,
+      "period": 400,
+      "volume": 50,
+      "length": 3108
+    },
+    {
+      "id": 4,
+      "period": 238,
+      "volume": 64,
+      "length": 5170
+    },
+    {
+      "id": 5,
+      "period": 280,
+      "volume": 64,
+      "length": 8430
+    },
+    {
+      "id": 6,
+      "period": 500,
+      "volume": 64,
+      "length": 7120
+    },
+    {
+      "id": 7,
+      "period": 300,
+      "volume": 48,
+      "length": 3172
+    }
+  ],
+  "assets": 31
+}

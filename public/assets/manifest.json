@@ -1,0 +1,287 @@
+{
+  "disk": {
+    "file": "Stunt_Car_Racer_1989_MicroStyle_cr_QTX.adf",
+    "bytes": 901120,
+    "sha256": "548fd106cd62f2d80159d48ddd5293d8b22b6b17f80c17a84a61d75f5c8a9e06"
+  },
+  "payload": {
+    "offset": 56320,
+    "size": 408540,
+    "loadAddress": 59136,
+    "sha256": "508646f12af15115de73b06940c79e579f920bf47ce55f7cd8920eca60b7921c"
+  },
+  "assets": [
+    {
+      "file": "original-code.bin",
+      "payloadOffset": 0,
+      "diskOffset": 56320,
+      "sourceBytes": 408540,
+      "sha256": "508646f12af15115de73b06940c79e579f920bf47ce55f7cd8920eca60b7921c",
+      "format": "unmodified 68000 payload, loaded at 0xE700"
+    },
+    {
+      "file": "cockpit.png",
+      "payloadOffset": 72356,
+      "diskOffset": 128676,
+      "sourceBytes": 14956,
+      "sha256": "8c8ec4eed9723c1676be3a193faf04baff07eb93346dc44c29a8a46912ad937e",
+      "paletteOffset": 72324,
+      "format": "4 bitplanes, row RLE"
+    },
+    {
+      "file": "menu.png",
+      "payloadOffset": 87378,
+      "diskOffset": 143698,
+      "sourceBytes": 32000,
+      "sha256": "146db4246e315d1418d2d9ad0fe594b8e34a167d93e7a5ca11795499f8ff4276",
+      "paletteOffset": 87346,
+      "format": "4 bitplanes, word interleaved"
+    },
+    {
+      "file": "preview.png",
+      "payloadOffset": 119444,
+      "diskOffset": 175764,
+      "sourceBytes": 21018,
+      "sha256": "0c564d271b33e59550fc5fcb50b6e9b322c44f4645cbd7e6bc26a1926de94cf9",
+      "paletteOffset": 119412,
+      "format": "4 bitplanes, row RLE"
+    },
+    {
+      "file": "standings.png",
+      "payloadOffset": 140528,
+      "diskOffset": 196848,
+      "sourceBytes": 20068,
+      "sha256": "0a62314abfd1fc372b55b7a9a95fd1739deb65d2c1e0c7206b55ecec6cfe1214",
+      "paletteOffset": 140496,
+      "format": "4 bitplanes, row RLE"
+    },
+    {
+      "file": "drivers.png",
+      "payloadOffset": 160662,
+      "diskOffset": 216982,
+      "sourceBytes": 32000,
+      "sha256": "10b8d3e51a76f0d72e9ba0bab828eb1995b7bcd6d66102bcdef7fbe1abe317de",
+      "paletteOffset": 160630,
+      "format": "4 bitplanes, word interleaved"
+    },
+    {
+      "file": "wreck.png",
+      "payloadOffset": 192728,
+      "diskOffset": 249048,
+      "sourceBytes": 28547,
+      "sha256": "fdc1974e13b824a0a14e63d873664f647cd716f39143fffbbd3ef59607c8528d",
+      "paletteOffset": 192696,
+      "format": "4 bitplanes, row RLE"
+    },
+    {
+      "file": "won.png",
+      "payloadOffset": 221342,
+      "diskOffset": 277662,
+      "sourceBytes": 26495,
+      "sha256": "b71d18d47a7c7cae5605fe65490ac9e2ae7d3a7a8be443b534c365ccf18ae5c1",
+      "paletteOffset": 221310,
+      "format": "4 bitplanes, row RLE"
+    },
+    {
+      "file": "lost.png",
+      "payloadOffset": 247904,
+      "diskOffset": 304224,
+      "sourceBytes": 24267,
+      "sha256": "1fce2c3ce6990c78c09f06012434430aabbba83772088bec1f9ccbe393dced1d",
+      "paletteOffset": 247872,
+      "format": "4 bitplanes, row RLE"
+    },
+    {
+      "file": "promotion.png",
+      "payloadOffset": 272238,
+      "diskOffset": 328558,
+      "sourceBytes": 24938,
+      "sha256": "54a000c4794f7db776dad3d07f4d794b0417d3d213bc696112153986fa2bfa73",
+      "paletteOffset": 272206,
+      "format": "4 bitplanes, row RLE"
+    },
+    {
+      "file": "primary-font.bin",
+      "payloadOffset": 71554,
+      "diskOffset": 127874,
+      "sourceBytes": 768,
+      "sha256": "b96e69535e329204a4bd82f05f47e9056d9eb42c9377d44b191ad825be9605b5"
+    },
+    {
+      "file": "font.bin",
+      "payloadOffset": 101314,
+      "diskOffset": 157634,
+      "sourceBytes": 8960,
+      "sha256": "cce80251d4b575f188da5219133b78c6cf300dac99daba950c37acbb9edae11d",
+      "format": "6 by 8 font from menu bitplane 0"
+    },
+    {
+      "file": "sound-0.wav",
+      "payloadOffset": 3512,
+      "diskOffset": 59832,
+      "sourceBytes": 2436,
+      "sha256": "17daee47064c95a960c8fcccf395c326b58e391bf2c4b9ec9118f4afe1b44b69",
+      "period": 150,
+      "volume": 30
+    },
+    {
+      "file": "sound-1.wav",
+      "payloadOffset": 5948,
+      "diskOffset": 62268,
+      "sourceBytes": 9032,
+      "sha256": "29e8fac3c91ddc9441c7d570af08908e73dca4691046383b625c2963124b1430",
+      "period": 180,
+      "volume": 64
+    },
+    {
+      "file": "sound-2.wav",
+      "payloadOffset": 14980,
+      "diskOffset": 71300,
+      "sourceBytes": 8014,
+      "sha256": "d138e7fd0179af64d73fa97a7f1cd055243c8552767007d12f28840ec3992a54",
+      "period": 238,
+      "volume": 56
+    },
+    {
+      "file": "sound-3.wav",
+      "payloadOffset": 22994,
+      "diskOffset": 79314,
+      "sourceBytes": 3108,
+      "sha256": "0c769a1eeb6b5afefcf8eced125054ec05b8cab79d07f1368d68be85fd6e2372",
+      "period": 400,
+      "volume": 50
+    },
+    {
+      "file": "sound-4.wav",
+      "payloadOffset": 26102,
+      "diskOffset": 82422,
+      "sourceBytes": 5170,
+      "sha256": "275e33b94e87b47e25c8e4b8c7f5ff8b85fd149935e173d0e27877f129954ed0",
+      "period": 238,
+      "volume": 64
+    },
+    {
+      "file": "sound-5.wav",
+      "payloadOffset": 31272,
+      "diskOffset": 87592,
+      "sourceBytes": 8430,
+      "sha256": "7d51163e10d2ebb2eebf1ae9e582303588b44e563d3c331141217127015b7025",
+      "period": 280,
+      "volume": 64
+    },
+    {
+      "file": "sound-6.wav",
+      "payloadOffset": 39702,
+      "diskOffset": 96022,
+      "sourceBytes": 7120,
+      "sha256": "22c1a9da0683246673923ac0db9e99b0c77ce7abb0f8e48f8f0439becd2dd931",
+      "period": 500,
+      "volume": 64
+    },
+    {
+      "file": "sound-7.wav",
+      "payloadOffset": 46822,
+      "diskOffset": 103142,
+      "sourceBytes": 3172,
+      "sha256": "12958d47b5bff8333c6d2e227e209890ced74a1929707b94afcb93ff6491016f",
+      "period": 300,
+      "volume": 48
+    },
+    {
+      "file": "recovery-template-flags",
+      "payloadOffset": 68034,
+      "diskOffset": 124354,
+      "sourceBytes": 16,
+      "sha256": "fecd01322cceab55148b2fbbe485edfcfaeb16501e93fec1eae04abc63274f96",
+      "format": "bit 7 excludes a geometry template from crane recovery"
+    },
+    {
+      "file": "track-0",
+      "payloadOffset": 70116,
+      "diskOffset": 126436,
+      "sourceBytes": 124,
+      "sha256": "6d4870da92f36de3d64247a2c968014414f519b7a181f800d01ae5c53158f378",
+      "sections": 44
+    },
+    {
+      "file": "track-1",
+      "payloadOffset": 70240,
+      "diskOffset": 126560,
+      "sourceBytes": 145,
+      "sha256": "9f5bee5a5229ec1ff92bd888892c4c77b38bb9984315c124f41b5c728848cd50",
+      "sections": 56
+    },
+    {
+      "file": "track-2",
+      "payloadOffset": 70385,
+      "diskOffset": 126705,
+      "sourceBytes": 145,
+      "sha256": "2c9ccceff868d1d13eb9a0859ccd49e646fa2c10eea33dd2ab5a3566e262b84a",
+      "sections": 53
+    },
+    {
+      "file": "track-3",
+      "payloadOffset": 70530,
+      "diskOffset": 126850,
+      "sourceBytes": 142,
+      "sha256": "7bd05599cb10172746a6ad7b38b8505e32a33b958ecbbc24680562b9616e5df6",
+      "sections": 44
+    },
+    {
+      "file": "track-4",
+      "payloadOffset": 70672,
+      "diskOffset": 126992,
+      "sourceBytes": 145,
+      "sha256": "8116674a36fd98410a3c4dbbd30d666f892487aee206a932df12a91ec5086fd3",
+      "sections": 40
+    },
+    {
+      "file": "track-5",
+      "payloadOffset": 70817,
+      "diskOffset": 127137,
+      "sourceBytes": 213,
+      "sha256": "a8924863b7a5ed570d6f9db3fa4caccf8f16b579e863814afdcf7bd38a0c8c66",
+      "sections": 78
+    },
+    {
+      "file": "track-6",
+      "payloadOffset": 71030,
+      "diskOffset": 127350,
+      "sourceBytes": 142,
+      "sha256": "a8fbced6f4eead69bb47225daa5fbb58f121a15ea68507e99426985892c87f08",
+      "sections": 52
+    },
+    {
+      "file": "track-7",
+      "payloadOffset": 71172,
+      "diskOffset": 127492,
+      "sourceBytes": 192,
+      "sha256": "9e8740a7e80ab96b7b4e0c75aa2f72c4e476f4bcea4a848eadfafdedf9dc3ce2",
+      "sections": 78
+    },
+    {
+      "file": "scenery.json",
+      "payloadOffset": 372894,
+      "diskOffset": 429214,
+      "sourceBytes": 811,
+      "sha256": "e8e9e2a177c10e6a512e5306d10177287e79670c42d5b26d39b7a798dd6cb522",
+      "format": "original silhouette templates, vertices, edge faces and azimuths"
+    },
+    {
+      "file": "config.json",
+      "payloadOffset": 352706,
+      "diskOffset": 409026,
+      "sourceBytes": 8,
+      "sha256": "53de86ddd595e7c91ab7c6945ab962891cf8c048ac76db87414843de709e3d3f",
+      "format": "division tracks, lowest division first"
+    },
+    {
+      "file": "drivers.json",
+      "payloadOffset": 66986,
+      "diskOffset": 123306,
+      "sourceBytes": 176,
+      "sha256": "6289081cb71288141a42405da04b1cf595e447a376e05978b5a89cb88974e32c",
+      "format": "14 character names at 16 byte strides"
+    }
+  ]
+}

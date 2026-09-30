@@ -1,0 +1,152 @@
+{
+  "format": "scr-dos-physics-v1",
+  "sourceImage": {
+    "file": "Stunt.img",
+    "bytes": 3145728,
+    "sha256": "0b2a521c3459d42e11bb2398d2062ea203f5e41856bea2e7c6e917c88f48ac95"
+  },
+  "decodedExeSha256": "e26ba7f00fe4f37cb256087518f31dd7fa6ca3250b511c37c3eae3b9eb27015e",
+  "payload": {
+    "file": "physics.bin",
+    "bytes": 105856,
+    "sha256": "d6a3939958cb8ec69f078f8be171815cffe35ee1b955dc7bd5136c91822b7153",
+    "sourceFileOffset": 512,
+    "sourceBytesUnchanged": true
+  },
+  "cpu": "16-bit x86 real mode",
+  "codeBytes": 40320,
+  "dataSegmentParagraphs": 2520,
+  "dataBytes": 65536,
+  "relocationWordOffsets": [
+    1,
+    34,
+    47,
+    66,
+    75,
+    144,
+    154,
+    296,
+    309,
+    366,
+    379,
+    1445,
+    1556,
+    1593,
+    1633,
+    15729,
+    16142,
+    16309,
+    16762,
+    16775,
+    16818,
+    17678,
+    17713,
+    19523,
+    19546,
+    19569,
+    19606,
+    19821,
+    20619,
+    21034,
+    33061,
+    33112,
+    96994,
+    96998,
+    97002,
+    97006,
+    97010,
+    97014,
+    97018,
+    97022,
+    38433,
+    38611,
+    38626,
+    38968,
+    39695
+  ],
+  "entryPoints": {
+    "deriveCalibration": 426,
+    "decodeTrack": 9694,
+    "initializeTrackMap": 24453,
+    "initializeRace": 16833,
+    "recover": 14720,
+    "controls": 17119,
+    "physics": 33248,
+    "locate": 26016,
+    "bridge": 5055,
+    "timerDivider": 7184,
+    "rollTables": 18449,
+    "steering": 22102,
+    "suspension": 33880,
+    "integrate": 15461,
+    "suspensionChange": 24028
+  },
+  "stops": {
+    "locate": [
+      26153,
+      26333
+    ],
+    "timerDivider": [
+      7203
+    ]
+  },
+  "calibrationRange": [
+    25711,
+    65535
+  ],
+  "state": {
+    "position": {
+      "bytePlanes": [
+        21260,
+        21263,
+        21266
+      ],
+      "axes": [
+        "x",
+        "y",
+        "z"
+      ],
+      "signedBits": 24,
+      "rawUnitsPerWorldUnit": [
+        512,
+        1024,
+        512
+      ]
+    },
+    "velocity": {
+      "bytePlanes": [
+        21269,
+        21275
+      ],
+      "signedBits": 16
+    },
+    "angles": {
+      "bytePlanes": [
+        21293,
+        21296
+      ],
+      "axes": [
+        "pitch",
+        "yaw",
+        "roll"
+      ],
+      "signedBits": 16,
+      "unitsPerTurn": 65536
+    },
+    "angularVelocity": {
+      "bytePlanes": [
+        21272,
+        21278
+      ],
+      "signedBits": 16
+    },
+    "section": 21632,
+    "chains": 19169,
+    "contact": 19238,
+    "offRoad": 19239,
+    "boostBCD": 22135,
+    "savedRecoverySection": 21525,
+    "input": 2226
+  },
+  "scope": "Native player physics, controls, tracks, crane, bridge, finite boost and timer divider; headless hardware adapter. Full DOS race/hardware equivalence is unverified."
+}
